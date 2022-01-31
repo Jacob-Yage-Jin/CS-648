@@ -6,7 +6,7 @@ const element = (
     student at SDSU, and I am expecting to graduate in May this year. I am looking
     forward to learn more about the MERN stack and full stack web development
     from this course!</p>
-    <a href="">VIEW MY GITHUB REPO</a>
+    <a href="https://github.com/JacobJinTheAsian/CS-648/tree/main/A1">VIEW MY GITHUB REPO</a>
   </div>
 );
 
