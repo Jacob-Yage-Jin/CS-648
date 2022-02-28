@@ -1,0 +1,25 @@
+{
+  "name": "a1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/nodemon -w server -e js,graphql server/server.js & npm run convert-jsx",
+    "convert-jsx": "npx babel src --presets @babel/react --out-dir public --watch --verbose",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob (Yage) Jin",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.25.3",
+    "Babel": "^0.0.1",
+    "express": "^4.17.2",
+    "graphql": "^0.13.2",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-react": "^7.16.7"
+  }
+}
