@@ -37,7 +37,7 @@ async function productAdd(_, { product }) {
   return savedProduct;
 }
 
-async function product(_, { id }) {
+async function productGet(_, { id }) {
   const product = await db.collection('products').findOne({ id });
   return product;
 }
@@ -64,13 +64,13 @@ const resolvers = {
   Query: {
     about: () => aboutMessage,
     productList,
-    product,
+    productGet,
   },
   Mutation: {
     setAboutMessage,
     productAdd,
     productUpdate,
-    productDelete
+    productDelete,
   },
 };
 

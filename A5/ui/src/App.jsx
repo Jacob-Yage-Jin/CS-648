@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import 'babel-polyfill';
 import 'whatwg-fetch';
 import React from 'react';

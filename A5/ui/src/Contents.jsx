@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 

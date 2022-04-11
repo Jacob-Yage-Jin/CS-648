@@ -7,8 +7,6 @@
     "start": "nodemon -w uiserver.js -w .env uiserver.js",
     "compile": "webpack --mode production",
     "watch": "webpack --watch",
-    "start2": "node_modules/.bin/nodemon -w uiserver.js -w .env uiserver.js & npm run convert-jsx",
-    "convert-jsx": "npx babel src --presets @babel/react --out-dir public --watch --verbose",
     "lint": "npx eslint . --ext js,jsx --ignore-pattern public"
   },
   "author": "Jacob (Yage) Jin",

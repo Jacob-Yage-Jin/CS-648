@@ -32,7 +32,7 @@ input ProductUpdateInputs {
 type Query {
   about: String!
   productList: [Product!]!
-  product(id: Int!): Product!
+  productGet(id: Int!): Product!
 }
 
 type Mutation {

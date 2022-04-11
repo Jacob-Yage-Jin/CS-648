@@ -12,8 +12,8 @@ export default class ProductImage extends React.Component {
   }
 
   async loadData() {
-    const query = `query product($id: Int!) {
-      product(id: $id) {
+    const query = `query productGet($id: Int!) {
+      productGet(id: $id) {
         id name price category image
       }
     }`;
@@ -28,7 +28,7 @@ export default class ProductImage extends React.Component {
       body: JSON.stringify({ query, variables: { id } }),
     });
     const result = await response.json();
-    this.setState({ product: result.data.product ? result.data.product : null });
+    this.setState({ product: result.data.productGet ? result.data.productGet : null });
   }
 
   render() {
@@ -36,17 +36,16 @@ export default class ProductImage extends React.Component {
     if (product.image) {
       return (
         <div>
-          <img src={product.image}/>
-          <Link to="/products">Back</Link>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <h2>There is no image for this product</h2>
+          <img src={product.image} alt={product.name} />
           <Link to="/products">Back</Link>
         </div>
       );
     }
+    return (
+      <div>
+        <h2>There is no image for this product</h2>
+        <Link to="/products">Back</Link>
+      </div>
+    );
   }
 }

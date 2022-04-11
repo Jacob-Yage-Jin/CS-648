@@ -10,9 +10,10 @@ export default class ProductEdit extends React.Component {
     super();
     this.state = {
       product: {},
-      redirect: false
+      redirect: false,
     };
     this.onSaveClick = this.onSaveClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   async onSaveClick(e) {
@@ -63,17 +64,15 @@ export default class ProductEdit extends React.Component {
     }
   }
 
-  onChange = (event, naturalValue) => {
+  onChange(event, naturalValue) {
     const { name, value: textValue } = event.target;
     const value = naturalValue === undefined ? textValue : naturalValue;
-    this.setState((prevState) => ({
-      product: { ...prevState.product, [name]: value },
-    }));
+    this.setState(prevState => ({ product: { ...prevState.product, [name]: value } }));
   }
 
   async loadData() {
-    const query = `query product($id: Int!) {
-      product(id: $id) {
+    const query = `query productGet($id: Int!) {
+      productGet(id: $id) {
         id name price category image
       }
     }`;
@@ -88,7 +87,7 @@ export default class ProductEdit extends React.Component {
       body: JSON.stringify({ query, variables: { id } }),
     });
     const result = await response.json();
-    this.setState({ product: result.data.product });
+    this.setState({ product: result.data.productGet });
   }
 
   render() {
@@ -98,7 +97,8 @@ export default class ProductEdit extends React.Component {
       return (
         <Redirect to="/products" />
       );
-    } else if (product && product.id) {
+    }
+    if (product && product.id) {
       return (
         <div>
           <div className="header">Edit product in inventory</div>
@@ -134,10 +134,9 @@ export default class ProductEdit extends React.Component {
           </form>
         </div>
       );
-    } else {
-      return (
-        <h1>Loading Data...</h1>
-      );
     }
+    return (
+      <h1>Loading Data...</h1>
+    );
   }
 }

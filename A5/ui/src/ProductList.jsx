@@ -1,5 +1,4 @@
 /* eslint "react/react-in-jsx-scope": "off" */
-/* globals React ReactDOM */
 /* eslint "react/jsx-no-undef":  "off" */
 /* eslint "no-alert": "off" */
 
@@ -156,8 +155,7 @@ export default class ProductList extends React.Component {
     this.loadData();
   }
 
-  async deleteProduct(id)  {
-    const loadData = this.loadData;
+  async deleteProduct(id) {
     const query = `mutation productDelete($id: Int!) {
       productDelete(id: $id)
     }`;
@@ -170,9 +168,9 @@ export default class ProductList extends React.Component {
     const result = await response.json();
 
     if (result.data.productDelete) {
-      loadData();
+      this.loadData();
     }
-  };
+  }
 
   render() {
     const { products } = this.state;
