@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button, Alert, Form, FormGroup, Col, FormControl, ControlLabel, InputGroup } from 'react-bootstrap';
+import {
+  Button, Alert, Form, FormGroup, Col, FormControl, ControlLabel, InputGroup,
+} from 'react-bootstrap';
 
 function AddAlert(props) {
-  const {show, handleDismiss } = props;
+  const { show, handleDismiss } = props;
 
   if (show) {
     return (
@@ -19,26 +21,16 @@ export default class ProductAdd extends React.Component {
   constructor() {
     super();
     this.onAddClick = this.onAddClick.bind(this);
-    this.createProduct = this.createProduct.bind(this);
     this.handleDismiss = this.handleDismiss.bind(this);
     this.handleShow = this.handleShow.bind(this);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
-  handleDismiss() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
-  }
-
-  onAddClick(e) {
+  async onAddClick(e) {
     e.preventDefault();
-    const { props } = this;
     const form = document.forms.productAdd;
     const product = {
       name: form.name.value,
@@ -46,16 +38,7 @@ export default class ProductAdd extends React.Component {
       category: form.category.value,
       image: form.image.value,
     };
-    this.createProduct(product);
-    this.handleDismiss();
-    this.handleShow();
-    form.name.value = '';
-    form.price.value = '';
-    form.category.value = '';
-    form.image.value = '';
-  }
 
-  async createProduct(product) {
     const query = `mutation productAdd($product: ProductInputs!) {
       productAdd(product: $product) {
         id
@@ -66,12 +49,28 @@ export default class ProductAdd extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, variables: { product } }),
     });
+
+    this.handleDismiss();
+    this.handleShow();
+    form.name.value = '';
+    form.price.value = '';
+    form.category.value = '';
+    form.image.value = '';
+  }
+
+  handleDismiss() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
   }
 
   render() {
+    const { show } = this.state;
     return (
       <div>
-        <AddAlert show={this.state.show} handleDismiss={this.handleDismiss}></AddAlert>
+        <AddAlert show={show} handleDismiss={this.handleDismiss} />
 
         <Form horizontal name="productAdd" onSubmit={this.onAddClick}>
           <FormGroup controlId="category">
@@ -96,7 +95,7 @@ export default class ProductAdd extends React.Component {
             <Col sm={9}>
               <InputGroup>
                 <InputGroup.Addon>$</InputGroup.Addon>
-                <FormControl type="text"></FormControl>
+                <FormControl type="text" />
               </InputGroup>
             </Col>
           </FormGroup>
@@ -106,7 +105,7 @@ export default class ProductAdd extends React.Component {
               Product Name
             </Col>
             <Col sm={9}>
-              <FormControl type="text"></FormControl>
+              <FormControl type="text" />
             </Col>
           </FormGroup>
 
@@ -115,11 +114,11 @@ export default class ProductAdd extends React.Component {
               Image Url
             </Col>
             <Col sm={9}>
-              <FormControl type="text"></FormControl>
+              <FormControl type="text" />
             </Col>
           </FormGroup>
 
-          <Button bsStyle="primary" type="submit" style={{float: "right"}}>Add Product</Button>
+          <Button bsStyle="primary" type="submit" style={{ float: 'right' }}>Add Product</Button>
         </Form>
       </div>
     );

@@ -4,7 +4,9 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Label, Button, Glyphicon, Table, Modal } from 'react-bootstrap';
+import {
+  Button, Glyphicon, Table, Modal,
+} from 'react-bootstrap';
 
 function ProductRow(props) {
   const { product, deleteProduct } = props;
@@ -72,7 +74,7 @@ export default class ProductList extends React.Component {
   }
 
   handleShow(id) {
-    this.setState({ show: true, id: id });
+    this.setState({ show: true, id });
   }
 
   async loadData() {
@@ -109,12 +111,12 @@ export default class ProductList extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, show } = this.state;
     return (
       <React.Fragment>
         <ProductTable products={products} deleteProduct={this.handleShow} />
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal show={show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Are you sure you want to delete this product</Modal.Title>
           </Modal.Header>
