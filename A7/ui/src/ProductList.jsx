@@ -132,6 +132,7 @@ export default class ProductList extends React.Component {
       <React.Fragment>
         <div className="product-count">
           Showing
+          {' '}
           {count}
           {' '}
           available products

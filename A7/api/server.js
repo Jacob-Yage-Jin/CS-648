@@ -61,8 +61,8 @@ async function productList() {
 }
 
 async function productCount() {
-  const count = await db.collection('products').count();
-  return count;
+  const result = await db.collection('products').aggregate([{ $group: { _id: null, count: { $sum: 1 } } }]).toArray();
+  return result[0].count;
 }
 
 const resolvers = {
