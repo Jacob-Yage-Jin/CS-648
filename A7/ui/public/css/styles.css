@@ -1,0 +1,9 @@
+#contents {
+  width: 600px;
+}
+
+.product-count {
+  border-bottom: 1px solid black;
+  padding: 0 0 5px 8px;
+  margin-bottom: 10px;
+}
